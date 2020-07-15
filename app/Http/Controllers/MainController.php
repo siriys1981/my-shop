@@ -9,6 +9,10 @@ use App\Review;
 
 class MainController extends Controller
 {
+    function test() {
+        //something here
+    }
+
     public function index ()
     {
     	//$title = 'Home page';
