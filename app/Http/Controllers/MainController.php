@@ -57,4 +57,9 @@ class MainController extends Controller
     	$message = 'Some message here...';
     	return view('main.contacts', compact('title', 'message'));
     }
+
+    public function testFoo() 
+    {
+        //some code there...
+    }
 }
