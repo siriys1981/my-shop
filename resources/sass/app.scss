@@ -1,1 +1,64 @@
-//
+// Fonts
+@import url('https://fonts.googleapis.com/css?family=Nunito');
+
+// Variables
+@import 'variables';
+
+// Bootstrap
+@import '~bootstrap/scss/bootstrap';
+
+body {
+	background: #ddd;
+}
+
+.main {
+	background: $backgroundGradient;
+}
+
+.cat-name {
+	color: $red;
+	font-size: $font-size-base * 1.5;
+	text-align: center;
+	text-transform: capitalize;
+}	
+
+.categoryName {
+	text-transform: capitalize;
+	color: darken($green, 6.25%);
+}
+
+.mainBlock {
+	position: relative;
+}
+
+.mainBlock a {
+	text-decoration: none;
+}
+
+.tagBlock {
+	position: absolute;
+	top: 0;
+	left: 0;
+	background-color: $yellow;
+	color: darken($indigo, 12.5%);
+	border-radius: 0 0 5px 0;
+}
+
+.productNameBlock {
+	text-align: center;
+	text-transform: capitalize;
+}
+
+.productNameBlock::first-letter {
+	font-size: $font-size-base * 1.25;
+}
+
+.productPriceBlock {
+	color: darken($orange, 12.5%);
+	font-size: $font-size-base * 1.25;
+}
+
+.mainBlock:hover {
+	opacity: 0.75;
+	border: 3px solid $purple;
+}

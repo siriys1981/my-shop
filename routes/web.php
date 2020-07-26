@@ -14,6 +14,12 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', 'MainController@index');
-Route::get('/category/{something}', 'MainController@category');
-Route::get('product/{something}', 'MainController@product');
+Route::get('/category/{slug}', 'MainController@category');
+Route::get('product/{slug}', 'MainController@product');
 Route::get('/contacts', 'MainController@contacts');
+
+Route::post('product/{slug}', 'MainController@getReview');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

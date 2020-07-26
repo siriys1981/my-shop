@@ -1,7 +1,7 @@
 @extends('mainlayouts.main')
 
 @section('index')
-	<h2 class="text-center">Index Categories</h2>
+	<h2 class="text-center my-3">Index Categories</h2>
 	<div class="container">
 		<div class="row justify-content-center">
 			@foreach($categories as $category)
@@ -9,17 +9,16 @@
 					<div class="border">
 						<a href="/category/{{$category->slug}}">
 							<img src="{{$category->img}}" alt="" class="img-fluid">
-							<div class="bg-light">{{$category->name}}</div>
+							<div class="bg-light cat-name">{{$category->name}}</div>
 						</a>
 					</div>
 				</div>
 			@endforeach
 		</div>
-		<h3>Comments</h3>
+		<h3 class="mr-2 my-2">Comments</h3>
 		@foreach($reviews as $review)
-			<p>{{$review["created_at"]}}</p>
-		    <h6>{{$review["review"]}}</h5>
-		    <br><br>
+			<p class="mb-1"><strong>Created at: </strong>{{$review["created_at"]}}</p>
+		    <p><strong>Review: </strong>{{$review["review"]}}</p>
 		@endforeach
 	</div>
 

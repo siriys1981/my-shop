@@ -25,8 +25,8 @@ class MainController extends Controller
         // $product = Product::find(1);
         // dd($product->category->name);
 
-        $categories = Category::all();
-        $products = Product::where('recommended','=',1)->get();
+        $categories = Category::with('products')->get();
+        $products = Product::with('category')->where('recommended','=',1)->get();
         $reviews = Review::latest()->limit(5)->get();
         //Product::where('recommended','=',1)->where('price','>',100)->where('category_id','=',2) -- можно так писать запросы к базе данных. Заканчивать нужно методом get() или first() - если возвращается одно значение
 
@@ -46,7 +46,7 @@ class MainController extends Controller
     public function product (string $slug) 
     {
         $products = Product::firstWhere('slug',$slug);
-        $reviews = Review::where('product_id','=',$products->id)->first();
+        $reviews = Review::where('product_id','=',$products->id)->get();
        // $category = Category::all();
         return view('shop.product', compact('products', 'reviews'));
     }
@@ -58,8 +58,16 @@ class MainController extends Controller
     	return view('main.contacts', compact('title', 'message'));
     }
 
-    public function testFoo() 
+    public function getReview(Request $request)
     {
-        //some code there...
+        $review = new Review();
+        $review->review = $request->comment;
+        $review->user_id = $request->user;
+        $review->product_id = $request->product;
+        $review->save(); //сохраняет данные модели в бд
+
+        return back(); //функция возврата на предыдущ страницу
     }
+
+    
 }
