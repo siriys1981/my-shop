@@ -23,3 +23,14 @@ Route::post('product/{slug}', 'MainController@getReview');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::group([
+	'prefix' => 'admin',
+	'namespace' => 'Admin',
+	'middleware' => ['auth']
+], function(){
+	Route::get('/', 'AdminController@index'); //функция-посредник для проверки авторизации
+});
+
+
+
