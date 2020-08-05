@@ -27,7 +27,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::group([
 	'prefix' => 'admin',
 	'namespace' => 'Admin',
-	'middleware' => ['auth']
+	'middleware' => ['auth', 'admin']
 ], function(){
 	Route::get('/', 'AdminController@index'); //функция-посредник для проверки авторизации
 });
