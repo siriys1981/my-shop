@@ -30,6 +30,8 @@ Route::group([
 	'middleware' => ['auth', 'admin']
 ], function(){
 	Route::get('/', 'AdminController@index'); //функция-посредник для проверки авторизации
+	Route::resource('/category', 'CategoryController');
+	Route::resource('/product', 'ProductController');
 });
 
 

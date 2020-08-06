@@ -242,9 +242,15 @@ return [
             'can'  => 'manage-blog',
         ],
         [
-            'text'        => 'pages',
-            'url'         => 'admin/pages',
+            'text'        => 'categories',
+            'url'         => '/admin/category',
             'icon'        => 'far fa-fw fa-file',
+            'label'       => 4,
+            'label_color' => 'success',
+        ],
+        [
+            'text'        => 'products',
+            'url'         => '/admin/product',
             'label'       => 4,
             'label_color' => 'success',
         ],
