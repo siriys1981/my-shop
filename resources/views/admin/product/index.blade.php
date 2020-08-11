@@ -4,9 +4,12 @@
 
 @section('content_header')
     <h1>Products</h1>
+    <a href="/admin/product/create" class="btn btn-primary btn-sm">Add product</a>
 @stop
 
 @section('content')
+   @include('admin._messages') 
+   {{-- добавили файл для обработки ошибок при заполнении формы --}}
    <table class="table">
    	<thead>
    		<tr>

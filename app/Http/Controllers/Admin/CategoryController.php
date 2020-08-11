@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Category;
+use App\Http\Requests\StoreCategory;
 
 class CategoryController extends Controller
 {
@@ -26,7 +27,8 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        //return 123;
+        return view('admin.category.create');
     }
 
     /**
@@ -35,9 +37,30 @@ class CategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreCategory $request)
     {
-        //
+       // dd($request->all());
+
+        //проверка валидации формы
+    //      $validatedData = $request->validate([
+    //     'name' => 'required|unique:categories|max:64',
+    //     'slug' => 'required|unique:categories|max:128',
+    //     'img' => 'nullable|mimes:jpeg,bmp,png,gif',
+    // ]);
+
+        $category = new Category();
+        $category->name = $request->name; //слева -то что в базе, справа - то, что приходит из формы
+        $category->slug = $request->slug;
+
+        $file = $request->file('img');
+        if($file) {
+            $fName = $file->getClientOriginalName();
+            $file->move( public_path('uploads'), $fName); //move функция для загрузки файла в БД, паблик_пас - путь к папке и потом имя файла для загрузки
+            $category->img = '/uploads' . $fName;
+        }
+
+        $category->save();
+        return redirect('/admin/category')->with('success', 'Category ' . $category->name . 'added!');
     }
 
     /**
@@ -69,7 +92,7 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(StoreCategory $request, $id)
     {
         //
     }

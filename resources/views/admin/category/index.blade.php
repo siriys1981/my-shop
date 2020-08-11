@@ -4,9 +4,11 @@
 
 @section('content_header')
     <h1>Categories</h1>
+    <a href="/admin/category/create" class="btn btn-primary btn-sm">Add category</a>
 @stop
 
 @section('content')
+	@include('admin._messages')
    <table class="table">
    	<thead>
    		<tr>

@@ -1,10 +1,11 @@
 <?php
-
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Product;
+use App\Category;
+use App\Http\Requests\StoreProduct;
 
 class ProductController extends Controller
 {
@@ -26,7 +27,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+         return view('admin.product.create');
     }
 
     /**
@@ -35,9 +36,23 @@ class ProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreProduct $request)
     {
-        //
+       $product = new Product();
+        $product->name = $request->name; //слева -то что в базе, справа - то, что приходит из формы
+        $product->slug = $request->slug;
+        $product->category_id = $request->prod_cat;
+
+        $file = $request->file('img');
+        if($file) {
+            $fName = $file->getClientOriginalName();
+            $file->move( public_path('uploads'), $fName); //move функция для загрузки файла в БД, паблик_пас - путь к папке и потом имя файла для загрузки
+            $product->img = '/uploads' . $fName;
+        }
+
+        $product->save();
+        return redirect('/admin/product')->with('success', 'Product ' . $product->name . ' added!');
+    
     }
 
     /**
