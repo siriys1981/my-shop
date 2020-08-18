@@ -10,8 +10,6 @@
 @section('content')
 {{-- проверка на ошибки --}}
 
- {{ $products[0]->category_id }}
-
 @include('admin._messages')
 
   <form action="/admin/product" method="POST" enctype="multipart/form-data">
